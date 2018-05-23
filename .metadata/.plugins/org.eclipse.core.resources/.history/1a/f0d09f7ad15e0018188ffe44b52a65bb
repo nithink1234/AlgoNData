@@ -1,0 +1,38 @@
+import java.util.*;
+public class AA_jewelsAndStones {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		System.out.println(numJewelsInStones("aA" , "aAAbbbb"));
+	}
+
+	
+	 static int numJewelsInStones(String J, String S) {
+		 
+		 Hashtable<Character, Integer>hs = new Hashtable<Character,Integer>();
+		 int count = 0;
+		 
+		 
+		 for(int i=0; i<S.length(); i++) {
+			 
+			 if(hs.containsKey(S.charAt(i)))
+				 hs.put(S.charAt(i), hs.get(S.charAt(i)) + 1);
+			 
+			 else {
+				 hs.put(S.charAt(i), 1);
+			 }
+			 
+		 }
+		 
+		 
+		 for(int i=0; i<J.length(); i++) {
+			 
+			 if(hs.containsKey(J.charAt(i))) {
+				 count += hs.get(hs.get(J.charAt(i)));
+			 }
+		 }
+		 
+		 return count;
+	 }
+}
