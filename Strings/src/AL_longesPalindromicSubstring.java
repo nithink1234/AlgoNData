@@ -1,3 +1,11 @@
+ /*
+ * Given a string s, find the longest palindromic substring in s. You may assume that the maximum length of s is 1000.
+
+Example 1: Input: "babad" Output: "bab"
+Note: "aba" is also a valid answer.
+
+Example 2: Input: "cbbd" Output: "bb"
+ */
 
 public class AL_longesPalindromicSubstring {
 
@@ -22,25 +30,45 @@ public class AL_longesPalindromicSubstring {
 	
 	static String longestPalindrome(String s) {
 	    int start = 0, end = 0;
+	    
+	    // Iterate thru the entire String 
 	    for (int i = 0; i < s.length(); i++) {
+	    	
+	    	// Each char can be taken as center and it can be checked for palindrome by checking its charc around it eg aba
+	    	// Should also consider case when pali is even .. bb so take i and i+1 as center as well 
+	    	// Get the max length pali of the two centers 
 	        int len1 = expandAroundCenter(s, i, i);
-	        int len2 = expandAroundCenter(s, i, i + 1);
+	        int len2 = expandAroundCenter(s, i, i + 1);	        
 	        int len = Math.max(len1, len2);
+	        //System.out.println("len: " + len + " start: " + start + " end: " + end);
+	        
+	        //Need to calc the start and end points of the pali given length and center of pali (i). 
+	        // Make sure it satifies for both even and odd length pali 
+	        // len-1/2 gives length of left side of center.. sub i to get start position 
+	        // len/2 gives right 
 	        if (len > end - start) {
 	            start = i - (len - 1) / 2;
 	            end = i + len / 2;
 	        }
+	        
+	        //System.out.println(" start: " + start + " end: " + end);
+	        //System.out.println("");
 	    }
 	    return s.substring(start, end + 1);
 	}
 
+	// Check for pali .i.e each charc at the center(for even) and around the center
+	// The L & R will be at a position when it stopped being pali 
+	// So length of pali will be R-L-1;
 	static int expandAroundCenter(String s, int left, int right) {
 	    int L = left, R = right;
+	    //System.out.println("L: " + L + " R: " + R);
 	    while (L >= 0 && R < s.length() && s.charAt(L) == s.charAt(R)) {
 	        L--;
 	        R++;
 	    }
-	    return R - L - 1;
+	    //System.out.println("L: " + L + " R: " + R + " R-L " + (R-L));
+	    return R - L -1;
 	}
 	
 	// Brute Force .. Time O(n3)

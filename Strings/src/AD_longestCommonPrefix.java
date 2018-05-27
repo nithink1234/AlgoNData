@@ -32,7 +32,7 @@ public class AD_longestCommonPrefix {
 			// Check if it matches .. if it does the index will be 0 as it is a prefex
 			// When it doesn't keep reducing the length of the comparison string until it does 
 			//or until its null in which case there is no common prefix
-			// if it does move on to next one  and repeate 
+			// if it does move on to next one  and repeat 
 			// it finally reduced to the longest common one 
 			while(strs[i].indexOf(first) != 0) {
 				// System.out.println( i + " " + strs[i].indexOf(first) + " " + first );

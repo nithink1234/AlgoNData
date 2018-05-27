@@ -1,3 +1,17 @@
+/*
+ * Given a string, find the length of the longest substring without repeating characters.
+
+Examples:
+
+Given "abcabcbb", the answer is "abc", which the length is 3.
+
+Given "bbbbb", the answer is "b", with the length of 1.
+
+Given "pwwkew", the answer is "wke", with the length of 3. 
+
+Note that the answer must be a substring, "pwke" is a subsequence and not a substring.
+ */
+
 import java.util.*;
 public class AF_longestSubstringWithoutRepeatingCharacters {
 
@@ -7,41 +21,31 @@ public class AF_longestSubstringWithoutRepeatingCharacters {
 		System.out.println(longestsubstring("pwwkew"));
 	}
 
-	
+	// Time: O(n2)  Space O(n)
+	// Iterate thru the entire string and add char with its position to hashmap 
+	// When u find a charc thats already present .i.e repeating charc
+	// delete all the chars until then and add that charc 
+	// At each point when u add keep track of longest substring
 	static int longestsubstring(String s) {
 		
-		char[] letters = s.toCharArray();
-		boolean[] bits = new boolean[128];
-		
+		HashMap<Character,Integer> ht = new HashMap<Character,Integer>();
+		int start =0;
 		int max =0;
-		int count =0;
-		Arrays.fill(bits,false);
-		
-		for(int i=0; i<letters.length; i++) {
+	
+		for(int i=0; i<s.length(); i++) {
 			
-			System.out.println(letters[i] + " " + bits[(int)letters[i]]);
-			
-			if(!bits[(int)letters[i]]) {
-				bits[(int)letters[i]] = true;
-				count++;
-				System.out.println(letters[i] + " " + bits[(int)letters[i]] + " " + count);
-			}
-			
-			else {
+			if(ht.containsKey(s.charAt(i))) {
 				
-				if(count > max) {
-					max = count;
+				int prev = ht.get(s.charAt(i));
+				
+				while(start <= prev) {
+					ht.remove(s.charAt(start));
+					start++;
 				}
-				
-				Arrays.fill(bits, false);
-				bits[(int)letters[i]] = true;
-				count = 1;
-				System.out.println(letters[i] + " " + bits[(int)letters[i]]+ max + " " + count);
 			}
-		}
-		
-		if(max == 0) {
-			max = count;
+			
+			ht.put(s.charAt(i), i);
+			max = Math.max(max,ht.size());
 		}
 		
 		return max;
