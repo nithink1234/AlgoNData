@@ -23,7 +23,7 @@ public class AO_maxContinousSum_KadaneAlgo {
 	// Kadane Algo
 	
 	static int maxsumkande(int[] nums) {
-		
+		return 0;
 	}
 
 	// Brute Force O(n2)
@@ -53,7 +53,6 @@ public class AO_maxContinousSum_KadaneAlgo {
 		
 		return highsum;
 	}
-	
 	
 	
 }

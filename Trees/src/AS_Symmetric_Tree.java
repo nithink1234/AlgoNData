@@ -1,5 +1,6 @@
 /*
- * Given a binary tree, check whether it is a mirror of itself (ie, symmetric around its center).
+ * 
+Given a binary tree, check whether it is a mirror of itself (ie, symmetric around its center).
 
 For example, this binary tree [1,2,2,3,4,4,3] is symmetric:
 
@@ -63,6 +64,9 @@ public class AS_Symmetric_Tree {
 	// check recursively if left of 1 is = right of other && right of 1 = left of other
 	// Return false whenever its not equal
 	static boolean isSymmetric(TreeNode root) {
+		
+		if(root == null)
+			return true;
 		
 		return ismirror(root,root);
 	}

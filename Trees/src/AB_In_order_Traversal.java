@@ -1,3 +1,21 @@
+/*
+ * Given a binary tree, return the preorder traversal of its nodes' values.
+
+Example:
+
+Input: [1,null,2,3]
+   1
+    \
+     2
+    /
+   3
+
+Output: [1,2,3]
+
+Follow up: Recursive solution is trivial, could you do it iteratively?
+
+ */
+
 import java.util.*;
 public class AB_In_order_Traversal extends BinaryTree {
 
@@ -19,8 +37,13 @@ public class AB_In_order_Traversal extends BinaryTree {
 		
 		
 		//Inorder_Recursion(bt.root);
+		List<Integer> result = new ArrayList<Integer>();
+		result = inOrderTraversal(bt.root);
 		
-		inOrderTraversal(bt.root);
+		for(int i=0; i<result.size(); i++) {
+			System.out.println(result.get(i));
+		}
+		
 	}
 	
 	static void Inorder_Recursion(TreeNode root) {
@@ -36,41 +59,35 @@ public class AB_In_order_Traversal extends BinaryTree {
 	}
 	
 	
-	static void inOrderTraversal(TreeNode root) {
-		
-		if(root != null) {
-			
-			Stack<TreeNode> st = new Stack<TreeNode>();
-			st.add(root);
-			
-			TreeNode current = root;
-			
-			// Add all the left nodes initially 
-			while(current != null) {
-				st.push(current);
-				current = current.left;
-			}
-			
-			// When no more left nodes 
-			while(!st.isEmpty()) {
-				
-				// Pop and print 
-				current = st.pop();
-				System.out.print(current.data + " ");
-				
-				// Add right if present 
-				if(current.right != null) {
-					current = current.right;
-					
-					// Add all left nodes again 
-					while(current != null) {
-						st.push(current);
-						current = current.left;
-					}
-				}
-				
-			}
-		}
+	static List<Integer> inOrderTraversal(TreeNode root) {
+        
+        List<Integer> result = new ArrayList<Integer>();
+        
+        //Null case
+        if(root== null)
+            return result;
+        
+        Stack<TreeNode> st = new Stack<TreeNode>();
+        TreeNode current = root;
+        
+        // the current wont be null in case there are left nodes 
+        // if current is null , n stack isn't empty , its in leaf node
+        // So pop and set it to its right child n repeate 
+        while(current!= null || !st.isEmpty()){
+            
+            // In this case there are more left nodes .. so push all
+            while(current !=null){
+                st.push(current);
+                current = current.left;
+            }
+            
+            current = st.pop();
+            result.add(current.data);
+            current = current.right;
+        }
+        
+        return result;
+        
 	}
 
 }

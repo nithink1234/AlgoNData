@@ -9,10 +9,12 @@ public class AH_sortSringsLexciographically {
 		lines.add("g1 act car");
 		lines.add("zo4 4 7");
 		lines.add("ab1 off key car");
-		lines.add("a8 act zoo");
+		lines.add("a8 act car");
 		
 		List<String> result = lexo(lines);
 		
+		//System.out.println(" ");
+		System.out.println("Result: ");
 		for(int i=0; i<result.size(); i++) {
 			System.out.println(result.get(i));
 		}
@@ -31,66 +33,55 @@ public class AH_sortSringsLexciographically {
 			
 		String line ;
 		TreeMap<String, ArrayList<String>> hm = new TreeMap<String, ArrayList<String>>();
-		ArrayList<String> identifiers = new ArrayList<String>();
+		ArrayList<String> result = new ArrayList<String>();
 		ArrayList<String> nums = new ArrayList<String>();
 		
 		
 		for(int i=0; i<lines.size(); i++) {
-			System.out.println(lines.get(i));
+			ArrayList<String> identifiers = new ArrayList<String>();
+			//System.out.println(lines.get(i));
 			String[] words  = lines.get(i).split(" ");
 			
-			System.out.println(words[0]);
-			line = words.toString();
+			// remove the first word. 
+			line = lines.get(i).replaceFirst(words[0], "");
 			
-			//System.out.println(line);
-			
-			if(checkifwords(words)) {
+			if(Character.isLetter(words[1].charAt(0))) {
 				
+				//System.out.println("line: " + line);
 				if(hm.containsKey(line)) {
 					identifiers = hm.get(line);
+					identifiers.add(words[0]);
 					Collections.sort(identifiers);
 				}
 				
-				identifiers.add(words[0]);
+				else {
+					identifiers.add(words[0]);
+				}
+				
 				hm.put(line, identifiers);
+				
 			}
 			
 			else {
-				nums.add(line);
+				nums.add(lines.get(i));
 			}
 			
-			identifiers.clear();
 		}
+		
 		
 		for(String key: hm.keySet()) {
 			
 			for(int i=0; i<hm.get(key).size(); i++) {
-				identifiers.add(hm.get(key).get(i) + key);
+				
+				//System.out.println(hm.get(key).get(i));
+				result.add(hm.get(key).get(i)  +  key);
 			}
 			
 		}
 		
-		identifiers.addAll(nums);
+		result.addAll(nums);
 		
-		return identifiers;
+		return result;
 	}
 	
-	
-	static boolean checkifwords(String[] words) {
-		
-		int num = 0;
-		
-		if(words.length > 1) {
-			String word = words[1];
-			
-			if(!word.isEmpty()) {
-				num = (int)word.charAt(0);
-			}
-			
-			if(num > 64 && num<123)
-				return true;
-		}
-		
-		return false;
-	}
 }

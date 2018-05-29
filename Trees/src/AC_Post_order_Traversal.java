@@ -1,3 +1,19 @@
+/*
+ * Given a binary tree, return the postorder traversal of its nodes' values.
+
+Example:
+
+Input: [1,null,2,3]
+   1
+    \
+     2
+    /
+   3
+
+Output: [3,2,1]
+
+Follow up: Recursive solution is trivial, could you do it iteratively?
+ */
 import java.util.*;
 public class AC_Post_order_Traversal extends BinaryTree{
 
@@ -17,9 +33,13 @@ public class AC_Post_order_Traversal extends BinaryTree{
 		bt.root.right.right.left = new TreeNode(13);
 		bt.root.right.right.left.right = new TreeNode(14);
 		
+		List<Integer> result = new ArrayList<Integer>();
+		//Post_order_Recursion(bt.root);
+		result = postOrderIteravtive(bt.root);
 		
-		Post_order_Recursion(bt.root);
-		postOrderIteravtive(bt.root);
+		for(int i=0; i<result.size(); i++) {
+			System.out.println(result.get(i));
+		}
 	}
 
 	
@@ -34,29 +54,35 @@ public class AC_Post_order_Traversal extends BinaryTree{
 		System.out.println(root.data);
 	}
 	
-	static void postOrderIteravtive(TreeNode root) {
-		
-		Stack<TreeNode> st1 = new Stack<TreeNode>();
-		Stack<TreeNode> st2 = new Stack<TreeNode>();
-		TreeNode current = null;
-		
-		st1.push(root);
-		
-		while(!st1.isEmpty()) {
-			
-			current = st1.pop();		
-			st2.add(current); 
-			
-			if(current.left != null)
-				st1.add(current.left);
-			
-			if(current.right != null)
-				st1.add(current.right);
-		}
-		
-		while(!st2.isEmpty()) {
-			System.out.print(st2.pop().data + " ");
-			
-		}
-	}
+	static List<Integer> postOrderIteravtive(TreeNode root) {
+        List<Integer> result = new ArrayList<Integer>();
+        if(root == null){
+            return result;
+        }
+        
+        TreeNode current = root;
+        Stack<TreeNode> st1 = new Stack<TreeNode>();
+        Stack<TreeNode> st2 = new Stack<TreeNode>();
+        st1.push(root);
+        
+        // Push left and right node of current in that order to stack 1 
+        // each time u pop stack 1 add it to stack 2 .. ull get postorder in reverse
+        while(!st1.isEmpty()){
+            current = st1.pop();
+            st2.push(current);
+            
+            if(current.left != null)
+                st1.push(current.left);
+            
+            if(current.right != null)
+                st1.push(current.right);
+        }
+        
+        // all the nodes are in reverse order in stack 2 .. so pop n print
+        while(!st2.isEmpty()){
+            result.add(st2.pop().data);
+        }
+        
+        return result;
+    }
 }

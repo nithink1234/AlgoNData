@@ -1,3 +1,38 @@
+/*
+ * Given a binary tree, determine if it is height-balanced.
+
+For this problem, a height-balanced binary tree is defined as:
+
+    a binary tree in which the depth of the two subtrees of every node never differ by more than 1.
+
+Example 1:
+
+Given the following tree [3,9,20,null,null,15,7]:
+
+    3
+   / \
+  9  20
+    /  \
+   15   7
+
+Return true.
+
+Example 2:
+
+Given the following tree [1,2,2,3,3,null,null,4,4]:
+
+       1
+      / \
+     2   2
+    / \
+   3   3
+  / \
+ 4   4
+
+Return false.
+
+ */
+
 import java.util.*;
 public class AV_Balanced_Binary_Tree {
 	private static boolean result = true;
@@ -20,7 +55,9 @@ public class AV_Balanced_Binary_Tree {
 		System.out.println(balanced(bt.root));
 	}
 
-	
+	// Do same code as getting height but here check if height difference is more than 1 from 2 subtrees
+	// this will need global variable to set boolean val 
+	// can be done without it as well.. 
 	static boolean balanced(TreeNode root) {
 		maxdepth(root);
 		return result;
