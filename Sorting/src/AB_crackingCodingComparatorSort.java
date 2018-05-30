@@ -23,7 +23,7 @@ class Checker implements Comparator<Player>{
 			return -1;
 		
 		// In case their scores are equal return by comparing their names 
-		// We dont do this reverse .. normal comparision 
+		// We don't do this reverse .. normal comparision 
 		else {
 			return p1.name.compareTo(p2.name);
 		}
@@ -46,6 +46,7 @@ public class AB_crackingCodingComparatorSort {
 		
 		Checker comparing = new Checker();
 		
+		// Another way to  sort reverse is to just use comparing.reverse() below.. instead of implementing it
 		Arrays.sort(team, comparing);
 		
 		for(int i=0; i<team.length; i++) {

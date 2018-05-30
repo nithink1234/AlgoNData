@@ -21,9 +21,24 @@ public class AO_maxContinousSum_KadaneAlgo {
 	}
 	
 	// Kadane Algo
-	
+	// Keep a sum of elements .. reset it when it goes negative .. keep track of max sum at every node.. 
+	// O(n) Divide and conquer 
 	static int maxsumkande(int[] nums) {
-		return 0;
+		
+		// In case there is only -ve numbers in arry
+		int max = nums[0];
+		int sum = nums[0];
+		
+		// Get the sum untill then .. n check to see if its bigger than current num
+		// keep track of max num. 
+		for(int i=1; i< nums.length; i++) {
+			
+			sum  = Math.max(sum + nums[i] , nums[i]);
+			max = Math.max(sum, max);
+		
+		}
+		
+		return max;
 	}
 
 	// Brute Force O(n2)
