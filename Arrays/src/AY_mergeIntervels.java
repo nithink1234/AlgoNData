@@ -38,8 +38,8 @@ public class AY_mergeIntervels {
 		// TODO Auto-generated method stub
 
 		List<Interval> input = new ArrayList<Interval>();
-		//input.add(new Interval(1,4));
-		//input.add(new Interval(7,9));
+		input.add(new Interval(1,4));
+		input.add(new Interval(2,3));
 		//input.add(new Interval(8,10));
 		//input.add(new Interval(15,18));
 		
@@ -55,6 +55,31 @@ public class AY_mergeIntervels {
 	
 	static List<Interval> merge(List<Interval> intervals){
 		
+		// Sort the intervals by start times. If the start times are same then sort by end times. 
+		Collections.sort(intervals, new Comparator<Interval>() {
+			
+			public int compare(Interval a, Interval b) {
+				
+				// Sort by start times
+				if(a.start > b.start)
+					return 1;
+				else if(a.start < b.start)
+					return -1;
+				
+				// if start times are same then sort by end times
+				else {
+					
+					if(a.end > b.end)
+						return 1;
+					else if(a.end < b.end)
+						return-1;
+				}
+				
+				return 0;
+			}
+		});
+		
+		
 		int i= 0;
 		while(i<intervals.size()) {
 			
@@ -62,7 +87,11 @@ public class AY_mergeIntervels {
 			// Remove the 2nd interval which has been merged.
 			if( i+1 < intervals.size() && intervals.get(i).end >= intervals.get(i+1).start) {
 				
-				intervals.get(i).end = intervals.get(i+1).end;
+				// Only when the second interval end is bigger than first interval end we need to update the end of merged
+				if(intervals.get(i+1).end > intervals.get(i).end)				
+					intervals.get(i).end = intervals.get(i+1).end;
+				
+				// otherwise if second interval is completley within the first then we just have to remove it
 				intervals.remove(i+1);
 			}
 			
