@@ -21,28 +21,29 @@ public class AP_Diameter_Tree {
 		
 	}
 
+	static int max;
+	
+	
 	static int diameter (TreeNode root) {
 		
+		// in case of null .. it shouldnt return -1.. 
+		max = 1;
+        maxdepth(root);
+        // Since u are only counting the edges ,its -1 
+        // The original max returns number of nodes in longest path
+		return max-1;
+	}
+	
+	// Same as Max depth, just rememebr the max of number of nodes in each subtree.. -1 will give the path .. rememeber the max path
+	static int maxdepth(TreeNode root) {
 		if(root == null)
 			return 0;
 		 
-	 int sum = 1 + finddeeppath(root);
+		int left = maxdepth(root.left);
+		int right = maxdepth(root.right);
 		
-		return sum;
-	}
-	
-	static int finddeeppath(TreeNode root) {
+		max = Math.max(max, left+right+1);
 		
-		if(root == null)
-			return 0;
-		
-		int left = finddeeppath(root.left);
-		int right = finddeeppath(root.right);
-		
-		if(left > right) {
-			return 1 + left;
-		}
-		
-		return 1 + right; 
+		return(Math.max(left+1, right+1));
 	}
 }

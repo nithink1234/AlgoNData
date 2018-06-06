@@ -47,6 +47,7 @@ public class AI_partitionLabels {
 		// For null case;
 		if(!s.isEmpty()) {
 			
+			// Set the partition point as lastindex of the first charcter
 			int j = 0;
 			int partition = lastindex.get(s.charAt(0));
 			int start = 0;

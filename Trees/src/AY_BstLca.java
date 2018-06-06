@@ -8,16 +8,19 @@ public class AY_BstLca {
 	
 	static int LCA(TreeNode root, int a, int b) {
 		
-		if(root == null)
-			return 0;
+		while(root != null) {
+			
+			if(a < root.data && b<root.data) {
+				root = root.left;
+			}
+			else if(a > root.data && b>root.data)
+				root= root.right;
+			else
+				break;
+			
+		}
 		
-		if(a < root.data && b < root.data)
-			LCA(root.left, a, b);
-		
-		else if (a > root.data && b > root.data)
-			LCA(root.right, a, b);
-		
-			return root.data;
+		return root.data;
 	}
 
 }

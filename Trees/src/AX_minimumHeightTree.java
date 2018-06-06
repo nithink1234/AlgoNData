@@ -40,6 +40,23 @@ public class AX_minimumHeightTree {
 		System.out.println("Min height is: " + Minheight(bt.root));
 	}
 
+	// Mine.. same as 
+	static int minDepth(TreeNode root) {
+        if(root == null)
+            return 0;
+        
+        int left = minDepth(root.left);
+        int right = minDepth(root.right);
+        
+        // Accounting for the case when root has only 1 node
+        if((left == 0 && right!=0) || left != 0 && right==0 )
+            return 1+ left+right;
+        
+        if(left>right)
+            return right +1;
+        
+        return left +1;
+	}
 	/*
 	 * 	 Same thing as max but send the minimum of left and right 
 		 Don’t forget the case when root has only 1 child. Then it will send  0 to even though its not

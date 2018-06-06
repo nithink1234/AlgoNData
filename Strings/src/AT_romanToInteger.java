@@ -27,7 +27,7 @@ public class AT_romanToInteger {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		System.out.println(romantoint(""));
+		System.out.println(romantoint("XVI"));
 	}
 	
 	// Time: O(n)  Space: O(n)
