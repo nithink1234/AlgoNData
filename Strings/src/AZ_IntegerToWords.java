@@ -5,6 +5,8 @@ public class AZ_IntegerToWords {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
+		System.out.println(convertowords(123));
+		
 	}
 	
 	static HashMap<Integer,String> hm = new HashMap<Integer,String>(); 
@@ -23,24 +25,24 @@ public class AZ_IntegerToWords {
 		if(num >= 1000000000) {
 			int extra = num/1000000000;
 			sb.append(convert(extra));
-			sb.append("Billion");
-			num = num/1000000000;
+			sb.append(" Billion ");
+			num = num%1000000000;
 		}
 		
 		// num is greater than Million 
 		if(num >= 1000000) {
 			int extra = num/1000000;
 			sb.append(convert(extra));
-			sb.append("Million");
-			num = num/1000000;
+			sb.append(" Million ");
+			num = num%1000000;
 		}
 		
 		// num is greater than Thousand 
 		if(num >= 1000) {
 			int extra = num/1000;
 			sb.append(convert(extra));
-			sb.append("Thousand");
-			num = num/1000;
+			sb.append(" Thousand ");
+			num = num%1000;
 		}
 		
 		// in the end the leftover digits. 
@@ -55,16 +57,16 @@ public class AZ_IntegerToWords {
 		
 		if(num >= 100) {
 			sb.append(hm.get(num/100));
-			sb.append("Hundred");
-			num = num/100;
+			sb.append(" Hundred ");
+			num = num%100;
 		}
 		
+		System.out.println(num);
 		if(num >= 20) {
-			sb.append(hm.get(num/100));
-			sb.append("Hundred");
-			num = num/100;
+			int numten = num/10;
+			sb.append(hm.get(numten*10));
+			num = num%10;
 		}
-		
 		
 		if(num <= 20) {
 			sb.append(hm.get(num));
@@ -76,18 +78,18 @@ public class AZ_IntegerToWords {
 	
 	public static void mapfill () {
 		
-		hm.put(0, "zero");
-		hm.put(1, "one");
-		hm.put(2, "two");
-		hm.put(3, "three");
-		hm.put(4, "four");
-		hm.put(5, "five");
-		hm.put(6, "six");
-		hm.put(7, "seven");
-		hm.put(8, "eight");
-		hm.put(9, "nine");
-		hm.put(10, "ten");
-		hm.put(11, "eleven");
+		hm.put(0, "Zero");
+		hm.put(1, "One");
+		hm.put(2, "Two");
+		hm.put(3, "Three");
+		hm.put(4, "Four");
+		hm.put(5, "Five");
+		hm.put(6, "Six");
+		hm.put(7, "Seven");
+		hm.put(8, "Eight");
+		hm.put(9, "Nine");
+		hm.put(10, "Ten");
+		hm.put(11, "Eleven");
 		hm.put(12, "Tweleve");
 		hm.put(13, "Thirteen");
 		hm.put(14, "Fourteen");
